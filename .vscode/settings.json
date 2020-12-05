@@ -1,0 +1,11 @@
+{
+  "javascript.preferences.quoteStyle": "single",
+  "javascript.implicitProjectConfig.checkJs": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "none",
+  "jupyter.searchForJupyter": false,
+  "tslint.autoFixOnSave": false,
+  "editor.formatOnSave": true
+}

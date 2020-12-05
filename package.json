@@ -1,0 +1,103 @@
+{
+  "name": "json-schema-editor",
+  "version": "0.0.7",
+  "private": false,
+  "author": "tim.susa",
+  "description": "A tool to add or change the json schemas",
+  "main": "./electron/electron.js",
+  "homepage": ".",
+  "files": [
+    "build/**/*",
+    "node_modules/**/*"
+  ],
+  "build": {
+    "appId": "com.timsusa.json-schema-editor-electron",
+    "asar": true,
+    "asarUnpack": true,
+    "releaseInfo": {
+      "releaseNotesFile": "./CHANGELOG.md"
+    },
+    "win": {
+      "target": "nsis",
+      "publish": [
+        "github"
+      ]
+    },
+    "mac": {
+      "category": "your.app.category.type",
+      "publish": [
+        "github"
+      ]
+    },
+    "linux": {
+      "target": "tar.gz",
+      "category": "breadcrumb.tool",
+      "publish": [
+        "github"
+      ]
+    },
+    "files": [
+      "build/**/*"
+    ],
+    "publish": {
+      "provider": "github",
+      "publishAutoUpdate": true
+    }
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.8.0",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@reduxjs/toolkit": "^1.4.0",
+    "electron-is-dev": "^1.0.1",
+    "electron-log": "^3.0.5",
+    "electron-window-state": "5.0.3",
+    "lodash": "^4.17.20",
+    "octokat": "^0.10.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.2.1",
+    "react-scripts": "3.4.3",
+    "typeface-roboto": "^0.0.75",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "concurrently": "4.1.0",
+    "electron": "9.2.0",
+    "electron-builder": "22.8.0",
+    "rimraf": "^2.6.3",
+    "standard-version": "8.0.1",
+    "wait-for-localhost": "*",
+    "wait-for-localhost-cli": "1.1.0"
+  },
+  "scripts": {
+    "dev": "yarn run clean && concurrently \"BROWSER=none react-scripts start\" \"wait-for-localhost 3000 && electron .\"",
+    "build": "yarn run clean && yarn build:web && yarn build:app",
+    "build:web": "react-scripts build",
+    "build:app": "yarn cp-src-electron && electron-builder -c.extraMetadata.main=build/app/electron.js -mwl",
+    "cp-src-electron": "mkdir build/app && cp -r ./electron/ build/app",
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "clean": "rimraf build",
+    "release:prepare": "standard-version -r $1",
+    "release:app": "electron-builder -mwl -p always"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
