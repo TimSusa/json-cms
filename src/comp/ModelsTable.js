@@ -27,7 +27,7 @@ export default function ModelsTable(props) {
           <TableCell align='left'>Model-Name</TableCell>
           <TableCell align='left'>Namespaces</TableCell>
           <TableCell align='left'>Tenant</TableCell>
-          <TableCell align='left'>Template-Name</TableCell>
+          <TableCell align='left'>Schema-Name</TableCell>
           <TableCell align='left'>Output</TableCell>
         </TableRow>
       </TableHead>

@@ -110,20 +110,12 @@ export default function TypesDialog() {
               </ListItem>
             )
           })}
-
-          <ListItem></ListItem>
         </List>
       </DialogContent>
       <DialogActions>
         <Button
           variant='contained'
           onClick={(e) => {
-            //e.preventDefault()
-
-            //dispatch(setTypesDialogOpen({ isTypesDialogOpen: false }))
-            // dispatch(
-            //   setIsAddTypeFieldDialogOpen({ isAddTypeFieldDialogOpen: true })
-            // )
             setIsAddTypeFieldDialogOpen(true)
           }}
           color='primary'

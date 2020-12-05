@@ -13,7 +13,7 @@ export const { reducer, actions } = createSlice({
   initialState: {
     types: [
       {
-        name: 'TypeExample ',
+        name: 'CityWeatherExampleSchema ',
         namespace: 'custom',
         fields: {
           city: basicTypes.string,
