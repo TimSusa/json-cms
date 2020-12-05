@@ -2,6 +2,6 @@
 
 <p align="center">
 
-  <img width="500" src="screenshot.png">
+  <img width="100%" src="screenshot.png">
 
 </p>
