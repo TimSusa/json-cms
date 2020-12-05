@@ -4,8 +4,6 @@
 
 # json-schema-editor
 
-A simple tool to change the breadcrumb for RED in the LeanCMS Universe. Please be aware, this is an electron app and supposed to be used internally.
-
 ## Core Features
 
 ## Users Guide
