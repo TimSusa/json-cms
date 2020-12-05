@@ -23,7 +23,7 @@ export default function TypesTable(props) {
     <Table className={classes.table} size='small' aria-label='a dense table'>
       <TableHead>
         <TableRow>
-          <TableCell>Type-Name</TableCell>
+          <TableCell>Template-Name</TableCell>
           <TableCell align='left'>Namespace</TableCell>
           <TableCell align='left'>Fields</TableCell>
         </TableRow>

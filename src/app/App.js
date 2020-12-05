@@ -18,7 +18,7 @@ import { addType, setTypesDialogOpen } from '../global-state'
 function App() {
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = React.useState(null)
-  const [isModalAddOpen, setIsModalAddOpen] = React.useState(null)
+  const [isModalAddOpen, setIsModalAddOpen] = React.useState(false)
   const handleClose = () => {
     setAnchorEl(null)
   }
@@ -26,7 +26,7 @@ function App() {
   return (
     <div className='App'>
       <Typography variant='h5' component='h1' gutterBottom>
-        JSON Schema Editor
+        Schema Registry
       </Typography>
       <Accordion>
         <AccordionDetails>
@@ -35,6 +35,9 @@ function App() {
         </AccordionDetails>
       </Accordion>
       <br></br>
+      <Typography variant='h5' component='h1' gutterBottom>
+        Model Registry
+      </Typography>
       <Accordion>
         <AccordionDetails>
           <ModelsTable></ModelsTable>
