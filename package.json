@@ -1,5 +1,5 @@
 {
-  "name": "json-schema-editor",
+  "name": "json-cms",
   "version": "0.0.7",
   "private": false,
   "author": "tim.susa",
@@ -11,7 +11,7 @@
     "node_modules/**/*"
   ],
   "build": {
-    "appId": "com.timsusa.json-schema-editor-electron",
+    "appId": "com.timsusa.json-cms-electron",
     "asar": true,
     "asarUnpack": true,
     "releaseInfo": {
