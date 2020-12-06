@@ -80,7 +80,7 @@
   },
   "scripts": {
     "dev": "yarn run clean && concurrently \"BROWSER=none react-app-rewired start\" \"wait-for-localhost 3000 && electron .\"",
-    "build": "yarn run clean && yarn build:web && yarn build:app",
+    "build": "yarn run clean && yarn build:web",
     "build:web": "react-app-rewired build",
     "build:app": "yarn cp-src-electron && electron-builder -c.extraMetadata.main=build/app/electron.js -mwl",
     "cp-src-electron": "mkdir build/app && cp -r ./electron/ build/app",
