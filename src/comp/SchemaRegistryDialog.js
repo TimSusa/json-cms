@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Dialog from '@material-ui/core/Dialog'
 import Button from '@material-ui/core/Button'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -35,12 +35,16 @@ export default function SchemaRegistryDialog() {
     types[currentTypeElementIdx] || {}
   const { title, description } = schema
   const [isEditorOpen, setIsEditorOpen] = useState(false)
-  const [editorValue, setEditorValue] = useState(
-    JSON.stringify(schema, null, 2)
-  )
+  const [editorValue, setEditorValue] = useState(schema)
   const options = {
     selectOnLineNumbers: true
   }
+  useEffect(() => {
+    if (isEditorOpen) {
+    } else {
+      setEditorValue(schema)
+    }
+  }, [isEditorOpen, schema])
   return (
     <Dialog
       open={isOpen}
@@ -132,10 +136,10 @@ export default function SchemaRegistryDialog() {
             language='json'
             theme='vs-dark'
             options={options}
-            value={editorValue}
+            value={JSON.stringify(editorValue, null, 2)}
             onChange={(value) => {
-              setEditorValue(value)
-              dispatch(setSchema({ schema: JSON.parse(editorValue) }))
+              setEditorValue(JSON.parse(value))
+              dispatch(setSchema({ schema: JSON.parse(value) }))
             }}
             // editorDidMount={::this.editorDidMount}
           />
@@ -169,7 +173,12 @@ export default function SchemaRegistryDialog() {
 
   function handleClose({ schema }) {
     console.log('tim ', editorValue)
-    dispatch(setSchema({ schema: JSON.parse(editorValue) }))
+    if (isEditorOpen) {
+      dispatch(setSchema({ schema: editorValue }))
+    } else {
+    }
+    setIsEditorOpen(false)
+
     //setIsAddTypeFieldDialogOpen(false)
     dispatch(setTypesDialogOpen({ isTypesDialogOpen: false }))
   }
