@@ -4,7 +4,7 @@ Create Schema Definitions and implement models with their values. According to t
 
 ## Live Demo
 
-https://json-cms-simple.vercel.app/
+https://json-cms.vercel.app/
 
 <p align="center">
   <img width="100%" src="./docs/screenshot.png">
