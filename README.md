@@ -12,11 +12,11 @@ https://json-schema-editor-simple.vercel.app/
 
 ## Useful for people, who
 
-...create JSON APIs
-...create Forms
-...create Schema Definitions
-...handling of Schemas in a Registry
-...handling of Data Models, derived from the Schema in a Registry
+- create JSON APIs
+- create Forms
+- create Schema Definitions
+- handling of Schemas in a Registry
+- handling of Data Models, derived from the Schema in a Registry
 
 ## Features
 
