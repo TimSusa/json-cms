@@ -131,7 +131,7 @@ export default function SchemaRegistryDialog() {
         </List>
         {isEditorOpen && (
           <MonacoEditor
-            //width='800'
+            width='500'
             height='500'
             language='json'
             theme='vs-dark'
