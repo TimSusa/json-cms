@@ -24,14 +24,14 @@
       ]
     },
     "mac": {
-      "category": "your.app.category.type",
+      "category": "json.schema.editor",
       "publish": [
         "github"
       ]
     },
     "linux": {
       "target": "tar.gz",
-      "category": "breadcrumb.tool",
+      "category": "json.schema.editor",
       "publish": [
         "github"
       ]

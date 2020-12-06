@@ -112,7 +112,7 @@ export default function SchemaRegistryDialog() {
             </FormControl>
           </ListItem>
           <ListItem>
-            <Typography variant='h4'>Preview</Typography>
+            <Typography variant='h5'>Preview</Typography>
           </ListItem>
           {!isEditorOpen && (
             <ListItem>
@@ -131,8 +131,8 @@ export default function SchemaRegistryDialog() {
         </List>
         {isEditorOpen && (
           <MonacoEditor
-            width='800'
-            height='600'
+            //width='800'
+            height='500'
             language='json'
             theme='vs-dark'
             options={options}
