@@ -128,6 +128,9 @@ export const { reducer, actions } = createSlice({
         state.types[state.currentTypeElementIdx].schema.properties[key] = obj
       }
     },
+    setSchema: (state, { payload: { schema } }) => {
+      state.types[state.currentTypeElementIdx].schema = schema
+    },
     changeTypeName: (state, { payload: { name } }) => {
       if (name) {
         state.types[state.currentTypeElementIdx].name = name
@@ -157,8 +160,8 @@ export const { reducer, actions } = createSlice({
 
       state.models.push({
         id: uuidv4(),
-        name: 'Un-Set-Model-Name',
-        tenantId: '321',
+        name: '',
+        tenantId: '',
         type: name,
         namespaces: [namespace],
         schemaId: id,
@@ -184,6 +187,7 @@ export const {
   addType,
   addTypeField,
   changeTypeField,
+  setSchema,
   changeTypeName,
   changeTypeNamespace,
   changeTypeTitle,

@@ -12,7 +12,6 @@ import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-import MonacoEditor from 'react-monaco-editor'
 import { useDispatch, useSelector } from 'react-redux'
 import { addType, setTypesDialogOpen, loadExamples } from '../global-state'
 
@@ -24,11 +23,6 @@ function App() {
     setAnchorEl(null)
   }
   const lastCurrentTypeElementIdx = useSelector((state) => state.types.length)
-
-  const code = 'sdafdf'
-  const options = {
-    selectOnLineNumbers: true
-  }
 
   return (
     <div className='App'>
@@ -55,16 +49,7 @@ function App() {
           ></AddModelDialog>
         </AccordionDetails>
       </Accordion>
-      <MonacoEditor
-        width='800'
-        height='600'
-        language='json'
-        theme='vs-dark'
-        value={code}
-        options={options}
-        // onChange={::this.onChange}
-        // editorDidMount={::this.editorDidMount}
-      />
+
       <div
         style={{
           position: 'fixed',

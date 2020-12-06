@@ -9,13 +9,15 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import AddTypeFieldDialog from './AddTypeFieldDialog'
 import Form from '@rjsf/material-ui'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import MonacoEditor from 'react-monaco-editor'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   setTypesDialogOpen,
   changeTypeName,
   changeTypeNamespace,
   changeTypeTitle,
-  changeTypeDescription
+  changeTypeDescription,
+  setSchema
   //changeTypeField
 } from '../global-state'
 
@@ -32,6 +34,13 @@ export default function SchemaRegistryDialog() {
   const { name, namespace, schema, uiSchema } =
     types[currentTypeElementIdx] || {}
   const { title, description } = schema
+  const [isEditorOpen, setIsEditorOpen] = useState(false)
+  const [editorValue, setEditorValue] = useState(
+    JSON.stringify(schema, null, 2)
+  )
+  const options = {
+    selectOnLineNumbers: true
+  }
   return (
     <Dialog
       open={isOpen}
@@ -41,6 +50,7 @@ export default function SchemaRegistryDialog() {
       <DialogTitle id='types-form-dialog-title'> {'Schema'}</DialogTitle>
       <DialogContent>
         <DialogContentText></DialogContentText>
+
         <List>
           <ListItem>
             <FormControl>
@@ -100,30 +110,56 @@ export default function SchemaRegistryDialog() {
           <ListItem>
             <Typography variant='h4'>Preview</Typography>
           </ListItem>
-          <ListItem>
-            <Form
-              disabled
-              schema={schema}
-              uiSchema={uiSchema}
-              children={true}
-            />
-          </ListItem>
-          <AddTypeFieldDialog
-            isOpen={isAddTypeFieldDialogOpen}
-            onClose={() => setIsAddTypeFieldDialogOpen(false)}
-          ></AddTypeFieldDialog>
+          {!isEditorOpen && (
+            <ListItem>
+              <Form
+                disabled
+                schema={schema}
+                uiSchema={uiSchema && uiSchema}
+                children={true}
+              />
+              <AddTypeFieldDialog
+                isOpen={isAddTypeFieldDialogOpen}
+                onClose={() => setIsAddTypeFieldDialogOpen(false)}
+              ></AddTypeFieldDialog>
+            </ListItem>
+          )}
         </List>
+        {isEditorOpen && (
+          <MonacoEditor
+            width='800'
+            height='600'
+            language='json'
+            theme='vs-dark'
+            options={options}
+            value={editorValue}
+            onChange={(value) => {
+              setEditorValue(value)
+              dispatch(setSchema({ schema: JSON.parse(editorValue) }))
+            }}
+            // editorDidMount={::this.editorDidMount}
+          />
+        )}
       </DialogContent>
       <DialogActions>
         <Button
           variant='contained'
-          onClick={(e) => {
-            setIsAddTypeFieldDialogOpen(true)
-          }}
+          onClick={() => setIsEditorOpen(!isEditorOpen)}
           color='primary'
         >
-          Add Field
+          Switch Preview
         </Button>
+        {!isEditorOpen && (
+          <Button
+            variant='contained'
+            onClick={(e) => {
+              setIsAddTypeFieldDialogOpen(true)
+            }}
+            color='primary'
+          >
+            Add Field
+          </Button>
+        )}
         <Button variant='contained' onClick={handleClose} color='primary'>
           OK
         </Button>
@@ -131,12 +167,9 @@ export default function SchemaRegistryDialog() {
     </Dialog>
   )
 
-  function handleClose() {
-    // dispatch(
-    //   changeTypeField({
-    //     fields
-    //   })
-    // )
+  function handleClose({ schema }) {
+    console.log('tim ', editorValue)
+    dispatch(setSchema({ schema: JSON.parse(editorValue) }))
     //setIsAddTypeFieldDialogOpen(false)
     dispatch(setTypesDialogOpen({ isTypesDialogOpen: false }))
   }

@@ -88,7 +88,8 @@
     "test": "react-app-rewired test",
     "clean": "rimraf build",
     "release:prepare": "standard-version -r $1",
-    "release:app": "electron-builder -mwl -p always"
+    "release:app": "electron-builder -mwl -p always",
+    "deploy": "vercel"
   },
   "eslintConfig": {
     "extends": "react-app"
