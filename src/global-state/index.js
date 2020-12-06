@@ -11,10 +11,13 @@ export const basicTypes = {
   custom: 'none'
 }
 
+const examples = extractSamples(samples.samples)
+
 export const { reducer, actions } = createSlice({
   name: 'typesAndModels',
   initialState: {
-    types: extractSamples(samples.samples),
+    samples: examples,
+    types: [examples[0]],
     models: [],
     isTypesDialogOpen: false,
     isAddTypeFieldDialogOpen: false,
@@ -57,39 +60,46 @@ export const { reducer, actions } = createSlice({
       }
       state.types.push({
         id: uuidv4(),
-        name: 'Put Name of Schema here!',
+        name: '',
         namespace: basicTypes.custom,
         uiSchema: JSON.stringify(uiSchema),
         formData: {},
         schema: {
           type: 'object',
-          title: 'Basic Types',
-          description: 'Basic Types for simple usage.',
+          title: '',
+          description: '',
           properties: {
-            text: {
-              type: basicTypes.string
-            },
-            integers: {
-              type: basicTypes.integer
-            },
-            boolean: {
-              type: basicTypes.boolean
-            }
+            // text: {
+            //   type: basicTypes.string
+            // }
           }
         }
       })
     },
     addTypeField: (state, { payload: { key, value } }) => {
-      state.types[state.currentTypeElementIdx].schema.properties[key] = {
-        type: value,
-        title: key,
-        items:
-          key === basicTypes.array
-            ? {
-                type: basicTypes.string
+      let obj = {}
+      if (value === basicTypes.array) {
+        obj = {
+          type: value,
+          title: key,
+          items: {
+            type: basicTypes.object,
+            properties: {
+              nested: {
+                title: 'Nested array',
+                type: 'string',
+                default: 'nested array default'
               }
-            : undefined
+            }
+          }
+        }
+      } else {
+        obj = {
+          type: value,
+          title: key
+        }
       }
+      state.types[state.currentTypeElementIdx].schema.properties[key] = obj
     },
     changeTypeField: (state, { payload: { key, value } }) => {
       if (key) {
@@ -126,6 +136,15 @@ export const { reducer, actions } = createSlice({
     changeTypeNamespace: (state, { payload: { namespace } }) => {
       state.types[state.currentTypeElementIdx].namespace = namespace
     },
+    changeTypeTitle: (state, { payload: { title } }) => {
+      state.types[state.currentTypeElementIdx].schema.title = title
+    },
+    changeTypeDescription: (state, { payload: { description } }) => {
+      state.types[state.currentTypeElementIdx].schema.description = description
+    },
+    loadExamples: (state) => {
+      state.types = state.samples
+    },
     addModel: (state, { payload: { type } }) => {
       const {
         name,
@@ -152,14 +171,6 @@ export const { reducer, actions } = createSlice({
       const idx = draftState.currentModelElementIdx
       draftState.models[idx].formData = formData
     },
-    changeModelDataNested: (
-      draftState,
-      { payload: { typeName, key, value, idx } }
-    ) => {
-      //const idx = draftState.currentModelElementIdx
-      console.log({ typeName, key, value, idx })
-      draftState.models[idx].json[typeName][key] = value
-    },
     changeModelName: (draftState, { payload: { name } }) => {
       const idx = draftState.currentModelElementIdx
       draftState.models[idx].name = name
@@ -175,9 +186,11 @@ export const {
   changeTypeField,
   changeTypeName,
   changeTypeNamespace,
+  changeTypeTitle,
+  changeTypeDescription,
+  loadExamples,
   addModel,
   changeModelData,
-  changeModelDataNested,
   changeModelName
 } = actions
 

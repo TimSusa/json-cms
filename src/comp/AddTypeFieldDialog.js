@@ -65,8 +65,8 @@ export default function AddTypeFieldDialog({ isOpen, onClose }) {
               onChange={(e) => handleChangeVal(e)}
             >
               {[
-                ...Object.values(basicTypes),
-                ...Object.values(extractCustomTypes(types))
+                ...Object.values(basicTypes)
+                //...Object.values(extractCustomTypes(types))
               ].map((typeName, idx) => {
                 return (
                   <MenuItem

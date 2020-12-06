@@ -13,7 +13,7 @@ import AddIcon from '@material-ui/icons/Add'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { addType, setTypesDialogOpen } from '../global-state'
+import { addType, setTypesDialogOpen, loadExamples } from '../global-state'
 
 function App() {
   const dispatch = useDispatch()
@@ -94,6 +94,16 @@ function App() {
             }}
           >
             Add Model
+          </MenuItem>
+
+          <MenuItem
+            onClick={() => {
+              dispatch(loadExamples())
+
+              setAnchorEl(null)
+            }}
+          >
+            Load Examples
           </MenuItem>
         </Menu>
       </div>
