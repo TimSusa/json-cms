@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "title": "Types",
+  "properties": {
+    "shortText": {
+      "type": "string",
+      "minLength": 3
+    },
+    "text": {
+      "type": "string",
+      "minLength": 3
+    },
+    "Integers": {
+      "type": "integer"
+    },
+    "number": {
+      "type": "number"
+    },
+    "boolean": {
+      "type": "boolean"
+    },
+    "radios": {
+      "title": "Basic radio button example",
+      "type": "string",
+      "enum": ["a", "b", "c"]
+    },
+    "comment": {
+      "title": "Comment",
+      "type": "string",
+      "maxLength": 20,
+      "validationMessage": "Don't be greedy!",
+      "description": "Please write your comment here."
+    }
+  },
+  "required": ["number"]
+}

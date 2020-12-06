@@ -50,7 +50,7 @@ export default function ModelsTable(props) {
             <TableCell>{row.tenantId}</TableCell>
             <TableCell>{row.type}</TableCell>
             <TableCell align='left'>
-              {JSON.stringify(row.json, null, '\t')}
+              {JSON.stringify(row.formData, null, '\t')}
             </TableCell>
           </TableRow>
         ))}

@@ -3,8 +3,8 @@ import React from 'react'
 import './App.css'
 import Typography from '@material-ui/core/Typography'
 import { Accordion, AccordionDetails } from '@material-ui/core'
-import TypesTable from '../comp/TypesTable'
-import TypesDialog from '../comp/TypesDialog'
+import SchemaRegistryTable from '../comp/SchemaRegistryTable'
+import SchemaRegistryDialog from '../comp/SchemaRegistryDialog'
 import ModelsTable from '../comp/ModelsTable'
 import ModelsDialog from '../comp/ModelsDialog'
 import AddModelDialog from '../comp/AddModelDialog'
@@ -30,8 +30,8 @@ function App() {
       </Typography>
       <Accordion>
         <AccordionDetails>
-          <TypesTable></TypesTable>
-          <TypesDialog></TypesDialog>
+          <SchemaRegistryTable></SchemaRegistryTable>
+          <SchemaRegistryDialog></SchemaRegistryDialog>
         </AccordionDetails>
       </Accordion>
       <br></br>

@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   }
 })
 
-export default function TypesTable(props) {
+export default function SchemaRegistryTable(props) {
   const classes = useStyles()
   const dispatch = useDispatch()
   const types = useSelector((state) => state.types || [])
@@ -23,9 +23,11 @@ export default function TypesTable(props) {
     <Table className={classes.table} size='small' aria-label='a dense table'>
       <TableHead>
         <TableRow>
-          <TableCell>Schema-Name</TableCell>
+          <TableCell>Id</TableCell>
+          <TableCell>Name</TableCell>
+          <TableCell>Title</TableCell>
           <TableCell align='left'>Namespace</TableCell>
-          <TableCell align='left'>Fields</TableCell>
+          <TableCell align='left'>Description</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -36,10 +38,12 @@ export default function TypesTable(props) {
             onClick={handleClick.bind(this, idx)}
           >
             <TableCell component='th' scope='row'>
-              {row.name}
+              {row.id}
             </TableCell>
+            <TableCell align='left'>{row.name}</TableCell>
+            <TableCell align='left'>{row.schema.title}</TableCell>
             <TableCell align='left'>{row.namespace}</TableCell>
-            <TableCell align='left'>{JSON.stringify(row.fields)}</TableCell>
+            <TableCell align='left'>{row.schema.description}</TableCell>
           </TableRow>
         ))}
       </TableBody>
