@@ -1,4 +1,4 @@
-# json-schema-editor
+# json-cms
 
 Create Schema Definitions and implement models with their values. According to the standard of http://json-schema.org/
 
