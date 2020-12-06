@@ -1,12 +1,20 @@
 # json-schema-editor
 
+Create Schema Definitions and implement models with their values. According to the standard of http://json-schema.org/
+
 <p align="center">
-
   <img width="100%" src="screenshot.png">
-
 </p>
 
-# Thanks to:
+## Useful for people, who
+
+...create JSON APIs
+...create Forms
+...create Schema Definitions
+
+## Thanks to:
+
+http://json-schema.org/
 
 Amazing work of:
 

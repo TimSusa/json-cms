@@ -37,7 +37,6 @@ export default function AddTypeFieldDialog({ isOpen, onClose }) {
   const handleChangeVal = (event) => {
     setVal(event.target.value)
   }
-  console.log('render Addfileialg ', isAddTypeFieldDialogOpen)
   return (
     <Dialog
       open={isOpen}

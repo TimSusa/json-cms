@@ -29,7 +29,7 @@ export default function SchemaRegistryDialog() {
     (state) => state.currentTypeElementIdx
   )
   const types = useSelector((state) => state.types || [])
-  const { fields, name, namespace, schema, uiSchema } =
+  const { name, namespace, schema, uiSchema } =
     types[currentTypeElementIdx] || {}
   const { title, description } = schema
   return (
