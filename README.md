@@ -12,6 +12,10 @@ Create Schema Definitions and implement models with their values. According to t
 ...create Forms
 ...create Schema Definitions
 
+## Electron App
+
+You can build an electron app for Win, Mac and Linux.
+
 ## Thanks to:
 
 http://json-schema.org/
