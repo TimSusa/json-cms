@@ -27,7 +27,7 @@ function App() {
   return (
     <div className='App'>
       <Typography variant='h5' component='h1' gutterBottom>
-        Schema Registry
+        Schemas
       </Typography>
       <Accordion>
         <AccordionDetails>
@@ -37,7 +37,7 @@ function App() {
       </Accordion>
       <br></br>
       <Typography variant='h5' component='h1' gutterBottom>
-        Model Registry
+        Models
       </Typography>
       <Accordion>
         <AccordionDetails>
