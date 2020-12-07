@@ -35,14 +35,18 @@ export default function SchemaRegistryDialog() {
     types[currentTypeElementIdx] || {}
   const { title, description } = schema
   const [isEditorOpen, setIsEditorOpen] = useState(false)
-  const [editorValue, setEditorValue] = useState(schema)
+  const [editorValue, setEditorValue] = useState(
+    JSON.stringify(schema, null, 2)
+  )
+  const [wasEditorChanged, setWasEditorChanged] = useState(false)
   const options = {
     selectOnLineNumbers: true
   }
   useEffect(() => {
     if (isEditorOpen) {
     } else {
-      setEditorValue(schema)
+      setEditorValue(JSON.stringify(schema, null, 2))
+      console.log('use effect set schema to editor')
     }
   }, [isEditorOpen, schema])
   return (
@@ -136,23 +140,27 @@ export default function SchemaRegistryDialog() {
             language='json'
             theme='vs-dark'
             options={options}
-            value={JSON.stringify(editorValue, null, 2)}
+            value={editorValue}
+            onError={(err) => console.warn(err)}
             onChange={(value) => {
-              setEditorValue(JSON.parse(value))
-              dispatch(setSchema({ schema: JSON.parse(value) }))
+              setWasEditorChanged(true)
+              setEditorValue(value)
+              //dispatch(setSchema({ schema: JSON.parse(value) }))
             }}
             // editorDidMount={::this.editorDidMount}
           />
         )}
       </DialogContent>
       <DialogActions>
-        <Button
-          variant='contained'
-          onClick={() => setIsEditorOpen(!isEditorOpen)}
-          color='primary'
-        >
-          Switch Preview
-        </Button>
+        {!wasEditorChanged && (
+          <Button
+            variant='contained'
+            onClick={() => setIsEditorOpen(!isEditorOpen)}
+            color='primary'
+          >
+            Switch Preview
+          </Button>
+        )}
         {!isEditorOpen && (
           <Button
             variant='contained'
@@ -172,9 +180,8 @@ export default function SchemaRegistryDialog() {
   )
 
   function handleClose({ schema }) {
-    console.log('tim ', editorValue)
     if (isEditorOpen) {
-      dispatch(setSchema({ schema: editorValue }))
+      dispatch(setSchema({ schema: JSON.parse(editorValue) }))
     } else {
     }
     setIsEditorOpen(false)
