@@ -185,6 +185,7 @@ export default function SchemaRegistryDialog() {
     } else {
     }
     setIsEditorOpen(false)
+    setWasEditorChanged(false)
 
     //setIsAddTypeFieldDialogOpen(false)
     dispatch(setTypesDialogOpen({ isTypesDialogOpen: false }))
