@@ -38,12 +38,12 @@ export default function SchemaRegistryDialog() {
   const [editorValue, setEditorValue] = useState(
     JSON.stringify(schema, null, 2)
   )
-  const [wasEditorChanged, setWasEditorChanged] = useState(false)
   const options = {
     selectOnLineNumbers: true
   }
   useEffect(() => {
-    if (isEditorOpen) {
+    if (!isEditorOpen) {
+      //dispatch(setSchema({ schema: JSON.parse(editorValue) }))
     } else {
       setEditorValue(JSON.stringify(schema, null, 2))
       console.log('use effect set schema to editor')
@@ -141,9 +141,7 @@ export default function SchemaRegistryDialog() {
             theme='vs-dark'
             options={options}
             value={editorValue}
-            onError={(err) => console.warn(err)}
-            onChange={(value) => {
-              setWasEditorChanged(true)
+            onChange={(value, e) => {
               setEditorValue(value)
               //dispatch(setSchema({ schema: JSON.parse(value) }))
             }}
@@ -152,15 +150,19 @@ export default function SchemaRegistryDialog() {
         )}
       </DialogContent>
       <DialogActions>
-        {!wasEditorChanged && (
-          <Button
-            variant='contained'
-            onClick={() => setIsEditorOpen(!isEditorOpen)}
-            color='primary'
-          >
-            Switch Preview
-          </Button>
-        )}
+        <Button
+          variant='contained'
+          onClick={() => {
+            if (isEditorOpen) {
+              dispatch(setSchema({ schema: JSON.parse(editorValue) }))
+            }
+            setIsEditorOpen(!isEditorOpen)
+          }}
+          color='primary'
+        >
+          Switch Preview
+        </Button>
+
         {!isEditorOpen && (
           <Button
             variant='contained'
@@ -175,6 +177,17 @@ export default function SchemaRegistryDialog() {
         <Button variant='contained' onClick={handleClose} color='primary'>
           OK
         </Button>
+
+        <Button
+          variant='contained'
+          onClick={() => {
+            setIsEditorOpen(false)
+            dispatch(setTypesDialogOpen({ isTypesDialogOpen: false }))
+          }}
+          color='primary'
+        >
+          Cancel
+        </Button>
       </DialogActions>
     </Dialog>
   )
@@ -185,7 +198,6 @@ export default function SchemaRegistryDialog() {
     } else {
     }
     setIsEditorOpen(false)
-    setWasEditorChanged(false)
 
     //setIsAddTypeFieldDialogOpen(false)
     dispatch(setTypesDialogOpen({ isTypesDialogOpen: false }))
