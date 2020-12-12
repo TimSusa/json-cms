@@ -123,7 +123,7 @@ export default function SchemaRegistryDialog() {
               <Form
                 disabled
                 schema={schema}
-                uiSchema={uiSchema && uiSchema}
+                uiSchema={uiSchema && JSON.parse(uiSchema)}
                 children={true}
               />
               <AddTypeFieldDialog
@@ -145,7 +145,7 @@ export default function SchemaRegistryDialog() {
               setEditorValue(value)
               //dispatch(setSchema({ schema: JSON.parse(value) }))
             }}
-            // editorDidMount={::this.editorDidMount}
+            //editorWillMount={editorWillMount}
           />
         )}
       </DialogContent>
@@ -202,4 +202,27 @@ export default function SchemaRegistryDialog() {
     //setIsAddTypeFieldDialogOpen(false)
     dispatch(setTypesDialogOpen({ isTypesDialogOpen: false }))
   }
+
+  // function editorWillMount(monaco) {
+  //   monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+  //     validate: true,
+  //     schemas: [
+  //       {
+  //         uri: 'http://json-schema.org/draft-07/schema#',
+  //         fileMatch: ['*']
+  //         // schema: {
+  //         //     type: "object",
+  //         //     properties: {
+  //         //         p1: {
+  //         //             enum: [ "v1", "v2"]
+  //         //         },
+  //         //         p2: {
+  //         //             $ref: "http://myserver/bar-schema.json"
+  //         //         }
+  //         //     }
+  //         // }
+  //       }
+  //     ]
+  //   })
+  // }
 }

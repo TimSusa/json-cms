@@ -10,7 +10,7 @@ import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
   setTypesDialogOpen,
   basicTypes,
@@ -20,16 +20,16 @@ import {
 export default function AddTypeFieldDialog({ isOpen, onClose }) {
   const dispatch = useDispatch()
   const classes = useStyles()
-  const types = useSelector((state) => state.types || [])
+  //const types = useSelector((state) => state.types || [])
   //const isAddTypeFieldDialogOpen = isOpen
   // useSelector(
   //   (state) => state.isAddTypeFieldDialogOpen
   // )
   const [valueLocal, setVal] = useState(basicTypes.boolean)
   const [keyNameLocal, setKeyNameLocal] = useState('dummyKey')
-  const isAddTypeFieldDialogOpen = useSelector(
-    (state) => state.isAddTypeFieldDialogOpen
-  )
+  // const isAddTypeFieldDialogOpen = useSelector(
+  //   (state) => state.isAddTypeFieldDialogOpen
+  // )
 
   // const [isTypeAddOpen, setIsTypeAddOpen] = React.useState(
   //   isAddTypeFieldDialogOpen
@@ -121,11 +121,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function extractCustomTypes(types) {
-  return types.reduce((acc, cur) => {
-    if (cur.namespace.toLowerCase() === basicTypes.custom.toLowerCase()) {
-      return { ...acc, [cur.name]: cur.name }
-    }
-    return acc
-  }, {})
-}
+// function extractCustomTypes(types) {
+//   return types.reduce((acc, cur) => {
+//     if (cur.namespace.toLowerCase() === basicTypes.custom.toLowerCase()) {
+//       return { ...acc, [cur.name]: cur.name }
+//     }
+//     return acc
+//   }, {})
+// }

@@ -59,6 +59,7 @@ export const { reducer, actions } = createSlice({
         boolean: {}
       }
       state.types.push({
+        //$schema: 'http://json-schema.org/draft-07/schema#',
         id: uuidv4(),
         name: '',
         namespace: basicTypes.custom,
@@ -68,6 +69,7 @@ export const { reducer, actions } = createSlice({
           type: 'object',
           title: '',
           description: '',
+          definitons: {},
           properties: {
             // text: {
             //   type: basicTypes.string
@@ -90,6 +92,26 @@ export const { reducer, actions } = createSlice({
                 type: 'string',
                 default: 'nested array default'
               }
+            }
+          }
+        }
+      } else if (value === basicTypes.object) {
+        obj = {
+          type: value,
+          title: key,
+          definitons: {
+            [key]: {
+              $id: `#${key}`,
+              type: value,
+              properties: {
+                street_address: { type: 'string' }
+              },
+              required: ['street_address']
+            },
+            type: basicTypes.object,
+            ...state.types[state.currentTypeElementIdx].schema.properties,
+            properties: {
+              [key]: { $ref: `#${key}` }
             }
           }
         }
@@ -116,6 +138,27 @@ export const { reducer, actions } = createSlice({
                   type: 'string',
                   default: 'nested array default'
                 }
+              }
+            }
+          }
+        } else if (value === basicTypes.object) {
+          obj = {
+            ...state.types[state.currentTypeElementIdx].schema,
+            type: value,
+            title: key,
+            definitons: {
+              [key]: {
+                $id: `#${key}`,
+                type: value,
+                properties: {
+                  street_address: { type: 'string' }
+                },
+                required: ['street_address']
+              },
+              type: basicTypes.object,
+
+              properties: {
+                [key]: { $ref: `#${key}` }
               }
             }
           }

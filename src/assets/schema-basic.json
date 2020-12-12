@@ -1,36 +1,30 @@
 {
-  "type": "object",
-  "title": "Types",
-  "properties": {
-    "shortText": {
-      "type": "string",
-      "minLength": 3
-    },
-    "text": {
-      "type": "string",
-      "minLength": 3
-    },
-    "Integers": {
-      "type": "integer"
-    },
-    "number": {
-      "type": "number"
-    },
-    "boolean": {
-      "type": "boolean"
-    },
-    "radios": {
-      "title": "Basic radio button example",
-      "type": "string",
-      "enum": ["a", "b", "c"]
-    },
-    "comment": {
-      "title": "Comment",
-      "type": "string",
-      "maxLength": 20,
-      "validationMessage": "Don't be greedy!",
-      "description": "Please write your comment here."
+  "$schema": "http://json-schema.org/draft-06/schema#",
+
+  "definitions": {
+    "address": {
+      "type": "object",
+      "properties": {
+        "street_address": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" }
+      },
+      "required": ["street_address", "city", "state"]
     }
   },
-  "required": ["number"]
+
+  "type": "object",
+
+  "properties": {
+    "billing_address": { "$ref": "#/definitions/address" },
+    "shipping_address": {
+      "allOf": [
+        { "$ref": "#/definitions/address" },
+        {
+          "properties": { "type": { "enum": ["residential", "business"] } },
+          "required": ["type"]
+        }
+      ]
+    }
+  }
 }
