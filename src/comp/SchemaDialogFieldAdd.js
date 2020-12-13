@@ -12,27 +12,27 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { useDispatch } from 'react-redux'
 import {
-  setTypesDialogOpen,
+  setSchemasDialogOpen,
   basicTypes,
-  changeTypeField
+  changeSchemaField
 } from '../global-state'
 
-export default function AddTypeFieldDialog({ isOpen, onClose }) {
+export default function SchemaDialogFieldAdd({ isOpen, onClose }) {
   const dispatch = useDispatch()
   const classes = useStyles()
   //const types = useSelector((state) => state.types || [])
-  //const isAddTypeFieldDialogOpen = isOpen
+  //const isSchemaDialogFieldAddOpen = isOpen
   // useSelector(
-  //   (state) => state.isAddTypeFieldDialogOpen
+  //   (state) => state.isSchemaDialogFieldAddOpen
   // )
   const [valueLocal, setVal] = useState(basicTypes.boolean)
   const [keyNameLocal, setKeyNameLocal] = useState('dummyKey')
-  // const isAddTypeFieldDialogOpen = useSelector(
-  //   (state) => state.isAddTypeFieldDialogOpen
+  // const isSchemaDialogFieldAddOpen = useSelector(
+  //   (state) => state.isSchemaDialogFieldAddOpen
   // )
 
   // const [isTypeAddOpen, setIsTypeAddOpen] = React.useState(
-  //   isAddTypeFieldDialogOpen
+  //   isSchemaDialogFieldAddOpen
   // )
   const handleChangeVal = (event) => {
     setVal(event.target.value)
@@ -84,7 +84,7 @@ export default function AddTypeFieldDialog({ isOpen, onClose }) {
         <Button
           variant='contained'
           onClick={() =>
-            dispatch(setTypesDialogOpen({ isTypesDialogOpen: false }))
+            dispatch(setSchemasDialogOpen({ isTypesDialogOpen: false }))
           }
           color='primary'
         >
@@ -100,13 +100,13 @@ export default function AddTypeFieldDialog({ isOpen, onClose }) {
   function handleClose() {
     if (keyNameLocal) {
       dispatch(
-        changeTypeField({
+        changeSchemaField({
           key: keyNameLocal,
           value: valueLocal
         })
       )
     }
-    //dispatch(setTypesDialogOpen({ isTypesDialogOpen: false }))
+    //dispatch(setSchemasDialogOpen({ isTypesDialogOpen: false }))
     onClose()
   }
 }

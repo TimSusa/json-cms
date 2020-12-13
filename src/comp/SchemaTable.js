@@ -6,7 +6,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import { useSelector, useDispatch } from 'react-redux'
-import { setTypesDialogOpen } from '../global-state'
+import { setSchemasDialogOpen } from '../global-state'
 
 const useStyles = makeStyles({
   table: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   }
 })
 
-export default function SchemaRegistryTable(props) {
+export default function SchemaTable(props) {
   const classes = useStyles()
   const dispatch = useDispatch()
   const types = useSelector((state) => state.types || [])
@@ -52,7 +52,7 @@ export default function SchemaRegistryTable(props) {
 
   function handleClick(idx, evt) {
     dispatch(
-      setTypesDialogOpen({
+      setSchemasDialogOpen({
         currentTypeElementIdx: idx,
         isTypesDialogOpen: true
       })

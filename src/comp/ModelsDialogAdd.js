@@ -12,7 +12,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import { useDispatch, useSelector } from 'react-redux'
 import { addModel } from '../global-state'
 
-export default function AddModelDialog({ isOpen, onClose }) {
+export default function ModelsDialogAdd({ isOpen, onClose }) {
   const dispatch = useDispatch()
   const classes = useStyles()
   const types = useSelector((state) => state.types || [])

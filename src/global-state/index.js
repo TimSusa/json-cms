@@ -14,19 +14,21 @@ export const basicTypes = {
 const examples = extractSamples(samples.samples)
 
 export const { reducer, actions } = createSlice({
-  name: 'typesAndModels',
+  name: 'global',
   initialState: {
     samples: examples,
     types: [examples[0]],
     models: [],
     isTypesDialogOpen: false,
-    isAddTypeFieldDialogOpen: false,
+    isSchemaDialogFieldAddOpen: false,
     currentTypeElementIdx: 0,
     isModelsDialogOpen: false,
-    currentModelElementIdx: 0
+    currentModelElementIdx: 0,
+    currentSchema: {},
+    currentModel: {}
   },
   reducers: {
-    setTypesDialogOpen: (
+    setSchemasDialogOpen: (
       draftState,
       { payload: { isTypesDialogOpen, currentTypeElementIdx } }
     ) => {
@@ -44,7 +46,7 @@ export const { reducer, actions } = createSlice({
         draftState.currentModelElementIdx = currentModelElementIdx
       }
     },
-    addType: (state) => {
+    addSchema: (state) => {
       const uiSchema = {
         text: {
           'ui:autofocus': true,
@@ -78,7 +80,7 @@ export const { reducer, actions } = createSlice({
         }
       })
     },
-    addTypeField: (state, { payload: { key, value } }) => {
+    addSchemaField: (state, { payload: { key, value } }) => {
       let obj = {}
       if (value === basicTypes.array) {
         obj = {
@@ -123,7 +125,7 @@ export const { reducer, actions } = createSlice({
       }
       state.types[state.currentTypeElementIdx].schema.properties[key] = obj
     },
-    changeTypeField: (state, { payload: { key, value } }) => {
+    changeSchemaField: (state, { payload: { key, value } }) => {
       if (key) {
         let obj = {}
         if (value === basicTypes.array) {
@@ -174,18 +176,18 @@ export const { reducer, actions } = createSlice({
     setSchema: (state, { payload: { schema } }) => {
       state.types[state.currentTypeElementIdx].schema = schema
     },
-    changeTypeName: (state, { payload: { name } }) => {
+    changeSchemaName: (state, { payload: { name } }) => {
       if (name) {
         state.types[state.currentTypeElementIdx].name = name
       }
     },
-    changeTypeNamespace: (state, { payload: { namespace } }) => {
+    changeSchemaNamespace: (state, { payload: { namespace } }) => {
       state.types[state.currentTypeElementIdx].namespace = namespace
     },
-    changeTypeTitle: (state, { payload: { title } }) => {
+    changeSchemaTitle: (state, { payload: { title } }) => {
       state.types[state.currentTypeElementIdx].schema.title = title
     },
-    changeTypeDescription: (state, { payload: { description } }) => {
+    changeSchemaDescription: (state, { payload: { description } }) => {
       state.types[state.currentTypeElementIdx].schema.description = description
     },
     loadExamples: (state) => {
@@ -225,16 +227,16 @@ export const { reducer, actions } = createSlice({
 })
 
 export const {
-  setTypesDialogOpen,
+  setSchemasDialogOpen,
   setModelsDialogOpen,
-  addType,
-  addTypeField,
-  changeTypeField,
+  addSchema,
+  addSchemaField,
+  changeSchemaField,
   setSchema,
-  changeTypeName,
-  changeTypeNamespace,
-  changeTypeTitle,
-  changeTypeDescription,
+  changeSchemaName,
+  changeSchemaNamespace,
+  changeSchemaTitle,
+  changeSchemaDescription,
   loadExamples,
   addModel,
   changeModelData,

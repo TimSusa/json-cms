@@ -3,17 +3,17 @@ import React from 'react'
 import './App.css'
 import Typography from '@material-ui/core/Typography'
 import { Accordion, AccordionDetails } from '@material-ui/core'
-import SchemaRegistryTable from '../comp/SchemaRegistryTable'
-import SchemaRegistryDialog from '../comp/SchemaRegistryDialog'
+import SchemaTable from '../comp/SchemaTable'
+import SchemaDialog from '../comp/SchemaDialog'
 import ModelsTable from '../comp/ModelsTable'
 import ModelsDialog from '../comp/ModelsDialog'
-import AddModelDialog from '../comp/AddModelDialog'
+import ModelsDialogAdd from '../comp/ModelsDialogAdd'
 import Fab from '@material-ui/core/Fab'
 import AddIcon from '@material-ui/icons/Add'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { addType, setTypesDialogOpen, loadExamples } from '../global-state'
+import { addSchema, setSchemasDialogOpen, loadExamples } from '../global-state'
 
 function App() {
   const dispatch = useDispatch()
@@ -31,8 +31,8 @@ function App() {
       </Typography>
       <Accordion>
         <AccordionDetails>
-          <SchemaRegistryTable></SchemaRegistryTable>
-          <SchemaRegistryDialog></SchemaRegistryDialog>
+          <SchemaTable></SchemaTable>
+          <SchemaDialog></SchemaDialog>
         </AccordionDetails>
       </Accordion>
       <br></br>
@@ -43,10 +43,10 @@ function App() {
         <AccordionDetails>
           <ModelsTable></ModelsTable>
           <ModelsDialog></ModelsDialog>
-          <AddModelDialog
+          <ModelsDialogAdd
             isOpen={isModalAddOpen}
             onClose={onClose}
-          ></AddModelDialog>
+          ></ModelsDialogAdd>
         </AccordionDetails>
       </Accordion>
 
@@ -75,17 +75,17 @@ function App() {
         >
           <MenuItem
             onClick={() => {
-              dispatch(addType())
+              dispatch(addSchema())
               setAnchorEl(null)
               dispatch(
-                setTypesDialogOpen({
+                setSchemasDialogOpen({
                   isTypesDialogOpen: true,
                   currentTypeElementIdx: lastCurrentTypeElementIdx
                 })
               )
             }}
           >
-            Add Type
+            Add Schema
           </MenuItem>
 
           <MenuItem

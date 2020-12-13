@@ -6,24 +6,24 @@ import DialogContent from '@material-ui/core/DialogContent'
 import { List, ListItem, TextField, Typography } from '@material-ui/core'
 import FormControl from '@material-ui/core/FormControl'
 import DialogContentText from '@material-ui/core/DialogContentText'
-import AddTypeFieldDialog from './AddTypeFieldDialog'
+import SchemaDialogFieldAdd from './SchemaDialogFieldAdd'
 import Form from '@rjsf/material-ui'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import MonacoEditor from 'react-monaco-editor'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  setTypesDialogOpen,
-  changeTypeName,
-  changeTypeNamespace,
-  changeTypeTitle,
-  changeTypeDescription,
+  setSchemasDialogOpen,
+  changeSchemaName,
+  changeSchemaNamespace,
+  changeSchemaTitle,
+  changeSchemaDescription,
   setSchema
-  //changeTypeField
+  //changeSchemaField
 } from '../global-state'
 
-export default function SchemaRegistryDialog() {
+export default function SchemaDialog() {
   const dispatch = useDispatch()
-  const [isAddTypeFieldDialogOpen, setIsAddTypeFieldDialogOpen] = useState(
+  const [isSchemaDialogFieldAddOpen, setIsSchemaDialogFieldAddOpen] = useState(
     false
   )
   const isOpen = useSelector((state) => state.isTypesDialogOpen)
@@ -67,7 +67,7 @@ export default function SchemaRegistryDialog() {
             <FormControl>
               <TextField
                 onChange={(evt) =>
-                  dispatch(changeTypeName({ name: evt.target.value }))
+                  dispatch(changeSchemaName({ name: evt.target.value }))
                 }
                 value={name || ''}
               ></TextField>
@@ -81,7 +81,9 @@ export default function SchemaRegistryDialog() {
               <TextField
                 value={namespace || ''}
                 onChange={(evt) =>
-                  dispatch(changeTypeNamespace({ namespace: evt.target.value }))
+                  dispatch(
+                    changeSchemaNamespace({ namespace: evt.target.value })
+                  )
                 }
               ></TextField>
             </FormControl>
@@ -95,7 +97,7 @@ export default function SchemaRegistryDialog() {
               <TextField
                 value={title || ''}
                 onChange={(evt) =>
-                  dispatch(changeTypeTitle({ title: evt.target.value }))
+                  dispatch(changeSchemaTitle({ title: evt.target.value }))
                 }
               ></TextField>
             </FormControl>
@@ -109,7 +111,7 @@ export default function SchemaRegistryDialog() {
                 value={description || ''}
                 onChange={(evt) =>
                   dispatch(
-                    changeTypeDescription({ description: evt.target.value })
+                    changeSchemaDescription({ description: evt.target.value })
                   )
                 }
               ></TextField>
@@ -126,10 +128,10 @@ export default function SchemaRegistryDialog() {
                 uiSchema={uiSchema && JSON.parse(uiSchema)}
                 children={true}
               />
-              <AddTypeFieldDialog
-                isOpen={isAddTypeFieldDialogOpen}
-                onClose={() => setIsAddTypeFieldDialogOpen(false)}
-              ></AddTypeFieldDialog>
+              <SchemaDialogFieldAdd
+                isOpen={isSchemaDialogFieldAddOpen}
+                onClose={() => setIsSchemaDialogFieldAddOpen(false)}
+              ></SchemaDialogFieldAdd>
             </ListItem>
           )}
         </List>
@@ -167,7 +169,7 @@ export default function SchemaRegistryDialog() {
           <Button
             variant='contained'
             onClick={(e) => {
-              setIsAddTypeFieldDialogOpen(true)
+              setIsSchemaDialogFieldAddOpen(true)
             }}
             color='primary'
           >
@@ -182,7 +184,7 @@ export default function SchemaRegistryDialog() {
           variant='contained'
           onClick={() => {
             setIsEditorOpen(false)
-            dispatch(setTypesDialogOpen({ isTypesDialogOpen: false }))
+            dispatch(setSchemasDialogOpen({ isTypesDialogOpen: false }))
           }}
           color='primary'
         >
@@ -199,8 +201,8 @@ export default function SchemaRegistryDialog() {
     }
     setIsEditorOpen(false)
 
-    //setIsAddTypeFieldDialogOpen(false)
-    dispatch(setTypesDialogOpen({ isTypesDialogOpen: false }))
+    //setIsSchemaDialogFieldAddOpen(false)
+    dispatch(setSchemasDialogOpen({ isTypesDialogOpen: false }))
   }
 
   // function editorWillMount(monaco) {
