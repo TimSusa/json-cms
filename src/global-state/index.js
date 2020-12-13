@@ -71,7 +71,6 @@ export const { reducer, actions } = createSlice({
           type: 'object',
           title: '',
           description: '',
-          definitons: {},
           properties: {
             // text: {
             //   type: basicTypes.string
@@ -94,26 +93,6 @@ export const { reducer, actions } = createSlice({
                 type: 'string',
                 default: 'nested array default'
               }
-            }
-          }
-        }
-      } else if (value === basicTypes.object) {
-        obj = {
-          type: value,
-          title: key,
-          definitons: {
-            [key]: {
-              $id: `#${key}`,
-              type: value,
-              properties: {
-                street_address: { type: 'string' }
-              },
-              required: ['street_address']
-            },
-            type: basicTypes.object,
-            ...state.types[state.currentTypeElementIdx].schema.properties,
-            properties: {
-              [key]: { $ref: `#${key}` }
             }
           }
         }
@@ -145,23 +124,10 @@ export const { reducer, actions } = createSlice({
           }
         } else if (value === basicTypes.object) {
           obj = {
-            ...state.types[state.currentTypeElementIdx].schema,
             type: value,
             title: key,
-            definitons: {
-              [key]: {
-                $id: `#${key}`,
-                type: value,
-                properties: {
-                  street_address: { type: 'string' }
-                },
-                required: ['street_address']
-              },
-              type: basicTypes.object,
-
-              properties: {
-                [key]: { $ref: `#${key}` }
-              }
+            properties: {
+              [key]: {}
             }
           }
         } else {
@@ -174,7 +140,11 @@ export const { reducer, actions } = createSlice({
       }
     },
     setSchema: (state, { payload: { schema } }) => {
-      state.types[state.currentTypeElementIdx].schema = schema
+      if (schema) {
+        state.types[state.currentTypeElementIdx].schema = schema
+      } else {
+        state.types[state.currentTypeElementIdx].schema = state.currentSchema
+      }
     },
     changeSchemaName: (state, { payload: { name } }) => {
       if (name) {
