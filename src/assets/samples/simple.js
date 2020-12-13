@@ -5,6 +5,33 @@ module.exports = {
     type: 'object',
     required: ['firstName', 'lastName'],
     properties: {
+      myNestedObject: {
+        type: 'object',
+        title: 'myNestedObject Title',
+        properties: {
+          timsName: {
+            title: 'timname',
+            type: 'string',
+            default: 'tim'
+          },
+          uliName: {
+            title: 'uliname',
+            type: 'string',
+            default: 'uli'
+          },
+          anotherNestedObject: {
+            title: 'another nested object title',
+            type: 'object',
+            properties: {
+              nestedObjectText: {
+                type: 'string',
+                title: 'nested object text title',
+                default: 'neste test object default falue'
+              }
+            }
+          }
+        }
+      },
       firstName: {
         type: 'string',
         title: 'First name',
